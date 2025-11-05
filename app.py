@@ -153,6 +153,8 @@ def create_app():
 
         return jsonify(barchart_data)
 
+    with app.app_context():
+       db.create_all()
 
     return app
 
