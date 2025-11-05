@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block styles%} <link rel="stylesheet" href="/static/css/login.css"> {% endblock %}
+
+{% block content %}
+
+    <div class="login-div">
+        <h1 class="heading">
+            <img src="/static/images/logo.png" alt="image of money" class="money-img">
+            MyFinance <br>
+            <span class="trckr">Tracker</span>
+        </h1>
+        
+        <div class="main-form">
+        <div class="tab-buttons">
+            <button class="tab active" id="login-tab">Login</button>
+            <button class="tab" id="signup-tab">Sign Up</button>
+        </div>
+    
+        
+        <div class="form-container">
+            <form action="{{url_for('login')}}" id="login-form"  class="form active" method="POST">
+                <div class="email-field">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input name="login-email" type="email" placeholder="Email" required>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div class="password-field">
+                    <i class="fa-solid fa-key"></i>
+                    <input name="login-password" type="password" placeholder="Password" required>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+            <a href="#" class="forgot-pwd">Forgot Password ?</a><br> 
+            <button type="submit" class="but-in">Login</button>
+        </form>
+        
+        <!---------------------------SIGN UP----------------------------------------->
+
+            <form action="{{url_for('signup')}}" id="signup-form" class="form" method="POST">
+            <div class="name-field">
+                <i class="fa-solid fa-user"></i>
+                <input name="signup-name" type="text" placeholder="Your Name" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="name-field">
+                <i class="fa-solid fa-user"></i>
+                <input name="signup-job" type="text"  placeholder="Your Occupation" required>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <div class="email-field">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input name="signup-email" type="email" placeholder="Email" required>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+
+                <div class="password-field">
+                    <i class="fa-solid fa-key"></i>
+                    <input name="signup-password" type="password" placeholder=" Create password" required>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+   
+            <br>
+            <button type="submit" class="but-up">Create Account</button>
+            </form>
+            
+        </div>
+        </div>
+    
+    </div>
+
+<script src="/static/js/login.js"></script>
+
+{% endblock %}

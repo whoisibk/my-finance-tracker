@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{%block styles%} <link rel="stylesheet" href="/static/css/dashboard.css"> {%endblock%}
+
+{% block content %}
+
+<div class="nav-bar">
+    <nav>
+        <ul>
+            <li> <img src="/static/images/logo.png" class="money-img" alt="Image of Money"><h3>MyFinance Tracker</h3></li>
+            
+            <li class="lst-item"><a href="#">Logout</a></li>
+            <li class="lst-item"><a href="#">Budgets</a></li>
+            <li class="lst-item"><a href="#">Transactions</a></li>
+            <li class="lst-item"><a href="#">Dashboard</a></li>
+            
+        </ul>
+    </nav>
+</div>
+
+
+<div class="main-body">
+
+    <div class="money-overview">
+        <div class="income-div"><p>Total Income</p> <h3>${{total_income}}</h3></div>
+        <div class="expenses-div"><p>Total Expenses</p><h3>${{total_expenses}}</h3></div>
+        <div class="savings-div"><p>Current Savings/Net Savings</p><h3>${{savings}}</h3></div>
+    </div>
+
+    <div class="overlay-popup"  id="overlay-popup"></div>
+    <div class="add-transac" id="add-transac">
+        <form id="form-popup" action="{{url_for('dashboard')}}" method="POST">
+            <h3>Add New Transaction</h3>
+            <div class="amount-div">
+                <select name="currency" id="curr" class="currencies">
+                    <option value="">--</option>
+                    <option value="₦">₦</option>
+                    <option value="$">$</option>
+                    <option value="£">£</option>
+                    <option value="€">€</option>
+                </select>
+                <input type="text" name="amount" class="amount" placeholder="Amount">
+                <div class="button-cover">
+                    <div class="button r" id="button-1">
+                        <input name="transaction-type" type="checkbox" class="checkbox" >
+                        <div class="knobs"></div>
+                        <div class="layer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-div">
+                <label for="">Category : </label>
+                <select name="category" id="category" class="categories">
+                    <option value="">--</option>
+                    <option value="Salary">Salary</option>
+                    <option value="Food">Food</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                </select> 
+            </div>
+
+            <div class="date-div">
+                <label for="">Date : </label>
+                <input name="datetime" type="datetime-local">
+            </div>
+            <div class="description-div">
+                <input type="text" name="description" id="" placeholder="Description">
+            </div>
+
+            <div class="saveclose-div">
+                <input type="button" value="Save Transaction" class="form-save" id="form-save">
+                <input type="button" value="Cancel" class="form-close" id="form-close">
+            </div>
+        </form>
+    </div>
+    
+    <div class="charts">
+        <div class="pie-charts">
+            <h3>Expense By Category</h3>
+            <canvas id="pie-chart_"></canvas>
+        </div>
+        <div class="bar-charts">
+            <h3>Income vs. Expense</h3>
+            <canvas id="bar-chart_"></canvas>
+        </div>
+
+    </div>
+
+<div class="table-section">
+  <div class="table">
+    <h3>Recent Transactions</h3>
+    <table class="transactions-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Category</th>
+          <th class="amt-head">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tx in transactions[:5] %}
+          <tr class="{{ tx.type|lower }}">
+            <td>{{ tx.date.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>{{ tx.description }}</td>
+            <td class="type">{{ tx.type }}</td>
+            <td>{{ tx.category }}</td>
+            <td class="amount">
+              {% if tx.type == 'Expense' %}-{% endif %}
+              ${{ "{:,.2f}".format(tx.amount) }}
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="5" class="no-data">No transactions yet</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="right-table">
+    <input type="button" value="+ Add Transactions" class="circle-transac" id="circle-transac">        
+    <input type="button" value="View All" class="vwall" id="vwall">
+  </div>
+</div>
+
+
+
+
+</div>
+
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

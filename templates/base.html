@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://kit.fontawesome.com/68c78e3a7d.js" crossorigin="anonymous"></script>   
+
+    {% block styles %}<link rel="stylesheet" href="/static/css/login.css">{% endblock %}
+    
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">    
+    
+    <title>{% block title %}MyFinance Tracker{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+
+    <div id="toast-container"></div>
+
+<script>
+function showToast(message, type = "info") {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+
+  const toast = document.createElement("div");
+  toast.classList.add("toast", type);
+  toast.textContent = message;
+  container.appendChild(toast);
+
+  setTimeout(() => toast.remove(), 4000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Wait a short time before showing
+  setTimeout(() => {
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          showToast({{ message|tojson }}, {{ category|tojson }});
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  }, 300);
+});
+
+{% if redirect_to_dashboard %}
+  setTimeout(() => {
+    window.location.href = "{{ url_for('dashboard') }}";
+  }, 1550); // wait 1.5s before redirecting
+
+{% endif %}
+
+</script>
+
+</body>
+</html>
