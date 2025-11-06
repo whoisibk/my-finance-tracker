@@ -9,6 +9,7 @@ body{
 
 /* <!---------------------------------navbar--------------------------------------- */
 .nav-bar{
+    width: 100%;
     display: block;
     background-color: white;
     justify-content: space-between;
@@ -20,7 +21,7 @@ body{
 }
 .nav-bar .lst-item{
     float: right;
-    margin-top: 20px
+    /* margin-bottom: 80px; */
 }
 .nav-bar ul a{
     text-decoration: none;
@@ -33,6 +34,10 @@ body{
     padding-bottom: 16px;
     border-bottom: 3.5px solid rgb(60, 133, 197);
 }
+.nav-links{
+    margin-top: -40px;
+    position: relative;
+}
 .nav-bar ul li{ 
     display:inline-flex;
     margin-right: 3%;
@@ -41,6 +46,12 @@ body{
     height: 39px;
     width: 39px;
     margin-top: 2.8%;
+}
+
+.hamburger{
+    display: none;
+    height:20px;
+    cursor: pointer;
 }
 
 
@@ -52,13 +63,13 @@ body{
     height:153px;
     display: flex;
     margin-left: 2%;
-    margin-top: 47px;
+    margin-top: 75px;
 }
 
 .money-overview p{
     color: grey;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 0.855rem;
+    font-size: 2.30vh;
     font-weight: bold;
     text-align: center;
 }
@@ -74,7 +85,7 @@ body{
 }
 
 .income-div h3, .expenses-div h3, .savings-div h3{
-    font-size: 27.3px;
+    font-size: 2.07vw;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     margin-top: -2px;
@@ -117,6 +128,38 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-left: 20px;
     color: rgb(53, 53, 53);
+}
+
+@media (max-width: 768px){
+    .main-body{
+        width: 95%;
+        margin-left: -2px;
+        margin-top: -25px;
+    }
+
+    /*------------------------------- CHARTS---------------------------------- */
+    .charts{
+        width: 100%;
+        display:inline-flexbox;
+        height: 285px;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-bottom: 50px;
+    }
+    .charts h3{
+        font-size: 2.4vh;
+
+    }
+    .pie-charts{
+        height: 47%;
+        /* width: 100%; */
+        /* margin-right: -5px; */
+    }
+    .bar-charts{
+        margin-top: 50px;
+        /* height: 30%; */
+        /* margin-left: -15px; */
+    }
 }
 
 .pie-charts{
@@ -243,15 +286,97 @@ thead .amt-head{
 
 
 /* Mobile responsiveness */
-@media (max-width: 768px) {
-  .table-section {
-    flex-direction: column;
-  }
-  .right-table {
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 100%;
-  }
+
+@media (max-width: 768px){
+
+
+    /*------------------------- TOP OF THE PAGE------------------------ */
+    .nav-bar .lst-item{
+        margin-bottom: 33px;
+    }
+    /* .nav-bar .lst-item:hover{
+        color: #0476ab;
+        border:2px solid #0476ab ;
+    } */
+    .nav-links{
+        flex-direction: column;
+        background-color: rgb(213, 232, 237);
+        position: absolute;
+        margin-top: auto;
+        top: 60px;
+        right: 0;
+        width: 107px;
+        padding: 10px;
+        color: white;
+        overflow: hidden;
+        opacity: 0;
+        /* max-height: 0; */
+        transition: all 0.3s ease;
+    }
+    .nav-links.active{
+        /* display: flex; */
+        height:49%;
+        overflow: visible;
+        opacity: 1;
+    }
+    .hamburger{
+        display: block;
+        float: right;
+        margin-top: -58px;
+        margin-right: 20px;
+    }
+
+
+    /* ------------------MONEY DIVS -------------------------*/
+    .money-overview{
+        margin-left: 25px;
+    }
+    .income-div, .expenses-div, .savings-div{
+        width: 40%;
+        height: 95px;
+    }
+    .money-overview div{
+        margin-left: -15px;
+    }
+    .money-overview p {
+        font-size: 0.745rem;
+    }
+    .money-overview h3{
+        font-size: 0.89rem;
+    }
+
+
+    /*--------------------- TRANSAC TABLES------------------------------- */
+
+    .table-section {
+        /* flex-direction: column; */
+        margin-top: 67vh;
+        display:flex;
+        /* width: 100%; */
+        /* justify-content: space-between; */
+        flex-wrap:wrap;
+        margin-left: 54px;
+        /* width: 100%; */
+    }
+    .table{
+        width: 100%;
+        margin-left: 0px ;
+    }
+    .right-table {
+        flex-direction: row;
+        /* justify-content: flex-end; */
+        /* width: 100%; */
+        /* position: relative; */
+        /* display: flex; */
+        position: absolute;
+        /* margin-left: -20px; */
+        margin-top: 110vh;
+        margin-left: 30%;
+        display:inline-flex;
+        height: 100px;
+        justify-content: space-between;
+        width: 100%;
+    } 
 }
 
 

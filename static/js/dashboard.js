@@ -1,6 +1,14 @@
+//responsive part
+const hamburger = document.getElementById('hamburger');
+const navLink = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', ()=>{
+    navLink.classList.toggle('active');
+});
+
+
 const add_trans = document.getElementById('circle-transac');
 const close_form = document.getElementById('form-close');
-
 const main_popup = document.getElementById('add-transac');
 const overlay_popup = document.getElementById('overlay-popup');
 const save_form = document.getElementById('form-save');
