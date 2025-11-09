@@ -150,9 +150,6 @@ def create_app():
             'labels': labels,
             'values': values,
         }
-        
-        with app.app_context():
-            db.create_all()
 
         return jsonify(barchart_data)
 
